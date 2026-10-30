@@ -22,3 +22,9 @@ https://www.tdtchannels.com/epg/TV.xml.gz
 
 - `scripts/build.py` descarga la tabla de canales de TDTChannels y genera `mis_canales_es.m3u8`, agrupada en Nacionales, Informativos, Deportivos, Infantiles, Eventuales y Autonómicos por comunidad.
 - `.github/workflows/actualizar.yml` lo ejecuta cada día y sube la lista si ha cambiado. También se puede lanzar a mano desde la pestaña **Actions**.
+
+## Comprobar los enlaces
+
+- `scripts/check.py` revisa cada canal de todas las listas `.m3u`/`.m3u8` del repo y escribe el resultado en `estado.md` (los que funcionan, los dudosos y los que fallan).
+- `.github/workflows/comprobar.yml` lo ejecuta cada día. También se puede lanzar a mano en **Actions → Comprobar enlaces → Run workflow**.
+- Ojo: GitHub hace la prueba desde servidores fuera de España, así que los canales con bloqueo por país pueden salir como fallidos aunque en casa funcionen. Para una prueba real desde tu conexión: `python scripts/check.py mis_canales_es.m3u8`.
