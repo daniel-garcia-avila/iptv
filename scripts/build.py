@@ -2,7 +2,8 @@
 
 - Si un canal tiene varios enlaces, usa el primero que responda (si no responde ninguno, deja el primero).
 - quitar.txt: nombres de canales a excluir, uno por linea (las lineas con # se ignoran).
-- extra.m3u8: canales propios que se anaden al final de la lista.
+- extra.m3u8: canales propios que se anaden al final de la lista. En lugar de un enlace se puede
+  poner un ID de AceStream (40 caracteres) o acestream://ID: se convierte al enlace del motor local.
 """
 import os, re, sys, urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -13,6 +14,13 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Sa
 STOP_AT = "Int. Europa"  # a partir de aqui son canales internacionales
 dst = sys.argv[1] if len(sys.argv) > 1 else "mis_canales_es.m3u8"
 CHECK = os.environ.get("NO_CHECK") != "1"
+
+ACE_ENGINE = "http://127.0.0.1:6878/ace/getstream?id="
+ACE_RE = re.compile(r"^(?:acestream://)?([0-9a-fA-F]{40})$")
+
+def ace(line):
+    m = ACE_RE.match(line.strip())
+    return ACE_ENGINE + m.group(1).lower() if m else line
 
 def norm(s):
     return s.strip().lower()
@@ -79,7 +87,7 @@ if os.path.exists("extra.m3u8"):
     for l in open("extra.m3u8", encoding="utf-8"):
         l = l.rstrip("\n")
         if l.strip() and not l.startswith("#EXTM3U") and not l.startswith("# "):
-            out.append(l); extra += l.startswith("#EXTINF")
+            out.append(l if l.startswith("#") else ace(l)); extra += l.startswith("#EXTINF")
 
 open(dst, "w", encoding="utf-8").write("\n".join(out) + "\n")
 print(f"{len(channels)} canales de TDTChannels ({alt} con enlace de reserva), {extra} extra, {len(quitar)} en quitar.txt")

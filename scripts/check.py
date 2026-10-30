@@ -20,6 +20,8 @@ def parse(path):
     return out
 
 def check(url):
+    if url.startswith("acestream://") or "127.0.0.1:6878" in url or "localhost:6878" in url:
+        return "ACE", "AceStream: solo se puede probar en un dispositivo con el motor instalado"
     try:
         req = urllib.request.Request(url, headers={"User-Agent": UA})
         with urllib.request.urlopen(req, timeout=12) as r:
@@ -35,18 +37,18 @@ def check(url):
 
 files = sys.argv[1:] or sorted(glob.glob("*.m3u") + glob.glob("*.m3u8"))
 report = ["# Estado de los enlaces", ""]
-total = {"OK": 0, "DUDOSO": 0, "FALLA": 0}
+total = {"OK": 0, "DUDOSO": 0, "FALLA": 0, "ACE": 0}
 for f in files:
     items = parse(f)
     with ThreadPoolExecutor(20) as ex:
         res = list(ex.map(lambda it: check(it[1]), items))
     c = {k: sum(1 for r in res if r[0] == k) for k in total}
     for k in total: total[k] += c[k]
-    report += [f"## {f}", "", f"✅ {c['OK']} funcionan · ⚠️ {c['DUDOSO']} dudosos · ❌ {c['FALLA']} fallan", ""]
+    report += [f"## {f}", "", f"✅ {c['OK']} funcionan · ⚠️ {c['DUDOSO']} dudosos · ❌ {c['FALLA']} fallan · 🔵 {c['ACE']} AceStream (sin comprobar)", ""]
     bad = [(n, u, s, d) for (n, u), (s, d) in zip(items, res) if s != "OK"]
     if bad:
         report += ["| Canal | Estado | Detalle |", "| - | - | - |"]
-        report += [f"| [{n}]({u}) | {'⚠️' if s == 'DUDOSO' else '❌'} | {d} |" for n, u, s, d in bad]
+        report += [f"| [{n}]({u}) | { {'DUDOSO': '⚠️', 'ACE': '🔵'}.get(s, '❌') } | {d} |" for n, u, s, d in bad]
         report.append("")
     print(f"{f}: {c}")
 open("estado.md", "w", encoding="utf-8").write("\n".join(report) + "\n")

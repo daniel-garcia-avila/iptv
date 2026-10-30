@@ -4,3 +4,8 @@
 # Copia este ejemplo, quítale el "# " del principio y pon tus datos:
 # #EXTINF:-1 tvg-logo="" group-title="Mis canales",Nombre del canal
 # https://ejemplo.com/directo.m3u8
+#
+# AceStream: en la línea del enlace puedes poner solo el ID (40 caracteres)
+# o acestream://ID. Se convierte solo al enlace del motor de Ace Stream
+# (http://127.0.0.1:6878/ace/getstream?id=ID), que necesita el motor abierto
+# en el mismo dispositivo donde ves la lista.

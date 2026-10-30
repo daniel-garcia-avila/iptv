@@ -23,7 +23,7 @@ https://www.tdtchannels.com/epg/TV.xml.gz
 - `scripts/build.py` descarga la tabla de canales de TDTChannels y genera `mis_canales_es.m3u8`, agrupada en Nacionales, Informativos, Deportivos, Infantiles, Eventuales y Autonómicos por comunidad.
 - Si un canal tiene varios enlaces, se usa el primero que funcione.
 - `quitar.txt`: canales que no quieres (un nombre por línea).
-- `extra.m3u8`: canales tuyos que se añaden al final de la lista.
+- `extra.m3u8`: canales tuyos que se añaden al final de la lista. Admite IDs de AceStream (ver instrucciones dentro del archivo).
 - `.github/workflows/actualizar.yml` lo ejecuta cada día y sube la lista si ha cambiado. También se puede lanzar a mano desde la pestaña **Actions**.
 
 ## Comprobar los enlaces
