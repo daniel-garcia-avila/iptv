@@ -1,0 +1,161 @@
+#EXTM3U url-tvg="https://web-production-f2ad8.up.railway.app/epg.xml" x-tvg-url="https://web-production-f2ad8.up.railway.app/epg.xml"
+#EXTINF:-1 tvg-id="dazn-laliga.iptv" tvg-name="DAZN LaLiga" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Futbol",DAZN LaLiga
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%20LaLiga
+#EXTINF:-1 tvg-id="dazn-laliga-2.iptv" tvg-name="DAZN LaLiga 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Futbol",DAZN LaLiga 2
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%20LaLiga%202
+#EXTINF:-1 tvg-id="m-laliga.iptv" tvg-name="M LALIGA" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/LaLiga_logo_2023.svg/200px-LaLiga_logo_2023.svg.png" group-title="Futbol",M LALIGA
+https://web-production-f2ad8.up.railway.app/play/es/M%20LALIGA
+#EXTINF:-1 tvg-id="m-laliga-2.iptv" tvg-name="M LALIGA 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/LaLiga_logo_2023.svg/200px-LaLiga_logo_2023.svg.png" group-title="Futbol",M LALIGA 2
+https://web-production-f2ad8.up.railway.app/play/es/M%20LALIGA%202
+#EXTINF:-1 tvg-id="gol-play.iptv" tvg-name="Gol Play" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/LaLiga_logo_2023.svg/200px-LaLiga_logo_2023.svg.png" group-title="Futbol",Gol Play
+https://web-production-f2ad8.up.railway.app/play/es/Gol%20Play
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-1.iptv" tvg-name="LaLiga TV Hypermotion 1" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 1
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%201
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-2.iptv" tvg-name="LaLiga TV Hypermotion 2" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 2
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%202
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-3.iptv" tvg-name="LaLiga TV Hypermotion 3" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 3
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%203
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-4.iptv" tvg-name="LaLiga TV Hypermotion 4" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 4
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%204
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-5.iptv" tvg-name="LaLiga TV Hypermotion 5" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 5
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%205
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-6.iptv" tvg-name="LaLiga TV Hypermotion 6" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 6
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%206
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-7.iptv" tvg-name="LaLiga TV Hypermotion 7" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 7
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%207
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-8.iptv" tvg-name="LaLiga TV Hypermotion 8" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 8
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%208
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-9.iptv" tvg-name="LaLiga TV Hypermotion 9" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 9
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%209
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-10.iptv" tvg-name="LaLiga TV Hypermotion 10" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 10
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%2010
+#EXTINF:-1 tvg-id="laliga-tv-hypermotion-11.iptv" tvg-name="LaLiga TV Hypermotion 11" tvg-logo="" group-title="Futbol",LaLiga TV Hypermotion 11
+https://web-production-f2ad8.up.railway.app/play/es/LaLiga%20TV%20Hypermotion%2011
+#EXTINF:-1 tvg-id="m-liga-de-campeones-1.iptv" tvg-name="M Liga de Campeones 1" tvg-logo="" group-title="Champions",M Liga de Campeones 1
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%201
+#EXTINF:-1 tvg-id="m-liga-de-campeones-2.iptv" tvg-name="M Liga de Campeones 2" tvg-logo="" group-title="Champions",M Liga de Campeones 2
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%202
+#EXTINF:-1 tvg-id="m-liga-de-campeones-3.iptv" tvg-name="M Liga de Campeones 3" tvg-logo="" group-title="Champions",M Liga de Campeones 3
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%203
+#EXTINF:-1 tvg-id="m-liga-de-campeones-4.iptv" tvg-name="M Liga de Campeones 4" tvg-logo="" group-title="Champions",M Liga de Campeones 4
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%204
+#EXTINF:-1 tvg-id="m-liga-de-campeones-5.iptv" tvg-name="M Liga de Campeones 5" tvg-logo="" group-title="Champions",M Liga de Campeones 5
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%205
+#EXTINF:-1 tvg-id="m-liga-de-campeones-6.iptv" tvg-name="M Liga de Campeones 6" tvg-logo="" group-title="Champions",M Liga de Campeones 6
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%206
+#EXTINF:-1 tvg-id="m-liga-de-campeones-7.iptv" tvg-name="M Liga de Campeones 7" tvg-logo="" group-title="Champions",M Liga de Campeones 7
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%207
+#EXTINF:-1 tvg-id="m-liga-de-campeones-8.iptv" tvg-name="M Liga de Campeones 8" tvg-logo="" group-title="Champions",M Liga de Campeones 8
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%208
+#EXTINF:-1 tvg-id="m-liga-de-campeones-9.iptv" tvg-name="M Liga de Campeones 9" tvg-logo="" group-title="Champions",M Liga de Campeones 9
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%209
+#EXTINF:-1 tvg-id="m-liga-de-campeones-10.iptv" tvg-name="M Liga de Campeones 10" tvg-logo="" group-title="Champions",M Liga de Campeones 10
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2010
+#EXTINF:-1 tvg-id="m-liga-de-campeones-11.iptv" tvg-name="M Liga de Campeones 11" tvg-logo="" group-title="Champions",M Liga de Campeones 11
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2011
+#EXTINF:-1 tvg-id="m-liga-de-campeones-12.iptv" tvg-name="M Liga de Campeones 12" tvg-logo="" group-title="Champions",M Liga de Campeones 12
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2012
+#EXTINF:-1 tvg-id="m-liga-de-campeones-13.iptv" tvg-name="M Liga de Campeones 13" tvg-logo="" group-title="Champions",M Liga de Campeones 13
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2013
+#EXTINF:-1 tvg-id="m-liga-de-campeones-14.iptv" tvg-name="M Liga de Campeones 14" tvg-logo="" group-title="Champions",M Liga de Campeones 14
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2014
+#EXTINF:-1 tvg-id="m-liga-de-campeones-15.iptv" tvg-name="M Liga de Campeones 15" tvg-logo="" group-title="Champions",M Liga de Campeones 15
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2015
+#EXTINF:-1 tvg-id="m-liga-de-campeones-16.iptv" tvg-name="M Liga de Campeones 16" tvg-logo="" group-title="Champions",M Liga de Campeones 16
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2016
+#EXTINF:-1 tvg-id="m-liga-de-campeones-17.iptv" tvg-name="M Liga de Campeones 17" tvg-logo="" group-title="Champions",M Liga de Campeones 17
+https://web-production-f2ad8.up.railway.app/play/es/M%20Liga%20de%20Campeones%2017
+#EXTINF:-1 tvg-id="dazn-1.iptv" tvg-name="DAZN 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Deportes",DAZN 1
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%201
+#EXTINF:-1 tvg-id="dazn-2.iptv" tvg-name="DAZN 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Deportes",DAZN 2
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%202
+#EXTINF:-1 tvg-id="dazn-3.iptv" tvg-name="DAZN 3" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Deportes",DAZN 3
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%203
+#EXTINF:-1 tvg-id="dazn-4.iptv" tvg-name="DAZN 4" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/DAZN_logo.svg/200px-DAZN_logo.svg.png" group-title="Deportes",DAZN 4
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%204
+#EXTINF:-1 tvg-id="movistar-deportes-1.iptv" tvg-name="Movistar Deportes 1" tvg-logo="" group-title="Deportes",Movistar Deportes 1
+https://web-production-f2ad8.up.railway.app/play/es/Movistar%20Deportes%201
+#EXTINF:-1 tvg-id="movistar-deportes-2.iptv" tvg-name="Movistar Deportes 2" tvg-logo="" group-title="Deportes",Movistar Deportes 2
+https://web-production-f2ad8.up.railway.app/play/es/Movistar%20Deportes%202
+#EXTINF:-1 tvg-id="movistar-deportes-3.iptv" tvg-name="Movistar Deportes 3" tvg-logo="" group-title="Deportes",Movistar Deportes 3
+https://web-production-f2ad8.up.railway.app/play/es/Movistar%20Deportes%203
+#EXTINF:-1 tvg-id="movistar-deportes-4.iptv" tvg-name="Movistar Deportes 4" tvg-logo="" group-title="Deportes",Movistar Deportes 4
+https://web-production-f2ad8.up.railway.app/play/es/Movistar%20Deportes%204
+#EXTINF:-1 tvg-id="bein-sports-n.iptv" tvg-name="beIN SPORTS N" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/BeIN_SPORTS_logo.svg/200px-BeIN_SPORTS_logo.svg.png" group-title="Deportes",beIN SPORTS N
+https://web-production-f2ad8.up.railway.app/play/es/beIN%20SPORTS%20N
+#EXTINF:-1 tvg-id="bein-sports-xtra.iptv" tvg-name="beIN SPORTS XTRA" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/BeIN_SPORTS_logo.svg/200px-BeIN_SPORTS_logo.svg.png" group-title="Deportes",beIN SPORTS XTRA
+https://web-production-f2ad8.up.railway.app/play/es/beIN%20SPORTS%20XTRA
+#EXTINF:-1 tvg-id="euro-sport-1.iptv" tvg-name="Euro Sport 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Eurosport_1_Logo_2015.svg/200px-Eurosport_1_Logo_2015.svg.png" group-title="Deportes",Euro Sport 1
+https://web-production-f2ad8.up.railway.app/play/es/Euro%20Sport%201
+#EXTINF:-1 tvg-id="euro-sport-2.iptv" tvg-name="Euro Sport 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Eurosport_2_logo_2015.svg/200px-Eurosport_2_logo_2015.svg.png" group-title="Deportes",Euro Sport 2
+https://web-production-f2ad8.up.railway.app/play/es/Euro%20Sport%202
+#EXTINF:-1 tvg-id="vamos-spain.iptv" tvg-name="Vamos Spain" tvg-logo="" group-title="Deportes",Vamos Spain
+https://web-production-f2ad8.up.railway.app/play/es/Vamos%20Spain
+#EXTINF:-1 tvg-id="teledeporte.iptv" tvg-name="Teledeporte" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Teledeporte.svg/200px-Teledeporte.svg.png" group-title="Deportes",Teledeporte
+https://web-production-f2ad8.up.railway.app/play/es/Teledeporte
+#EXTINF:-1 tvg-id="dazn-f1.iptv" tvg-name="DAZN F1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/200px-F1.svg.png" group-title="Motor",DAZN F1
+https://web-production-f2ad8.up.railway.app/play/es/DAZN%20F1
+#EXTINF:-1 tvg-id="sky-sports-f1.iptv" tvg-name="Sky Sports F1" tvg-logo="" group-title="Motor",Sky Sports F1
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20F1
+#EXTINF:-1 tvg-id="sky-sport-f1.iptv" tvg-name="Sky Sport F1" tvg-logo="" group-title="Motor",Sky Sport F1
+https://web-production-f2ad8.up.railway.app/play/it/Sky%20Sport%20F1
+#EXTINF:-1 tvg-id="sky-sport-moto-gp.iptv" tvg-name="Sky Sport Moto GP" tvg-logo="" group-title="Motor",Sky Sport Moto GP
+https://web-production-f2ad8.up.railway.app/play/it/Sky%20Sport%20Moto%20GP
+#EXTINF:-1 tvg-id="tennis-channel.iptv" tvg-name="Tennis Channel" tvg-logo="" group-title="Tenis",Tennis Channel
+https://web-production-f2ad8.up.railway.app/play/us/Tennis%20Channel
+#EXTINF:-1 tvg-id="sky-sports-tennis.iptv" tvg-name="Sky Sports Tennis" tvg-logo="" group-title="Tenis",Sky Sports Tennis
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Tennis
+#EXTINF:-1 tvg-id="sky-sport-tennis.iptv" tvg-name="Sky Sport Tennis" tvg-logo="" group-title="Tenis",Sky Sport Tennis
+https://web-production-f2ad8.up.railway.app/play/de/Sky%20Sport%20Tennis
+#EXTINF:-1 tvg-id="supersport-tennis.iptv" tvg-name="SuperSport Tennis" tvg-logo="" group-title="Tenis",SuperSport Tennis
+https://web-production-f2ad8.up.railway.app/play/za/SuperSport%20Tennis
+#EXTINF:-1 tvg-id="movistar-golf.iptv" tvg-name="Movistar Golf" tvg-logo="" group-title="Golf",Movistar Golf
+https://web-production-f2ad8.up.railway.app/play/es/Movistar%20Golf
+#EXTINF:-1 tvg-id="sky-sports-golf.iptv" tvg-name="Sky Sports Golf" tvg-logo="" group-title="Golf",Sky Sports Golf
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Golf
+#EXTINF:-1 tvg-id="golf-tv.iptv" tvg-name="Golf TV" tvg-logo="" group-title="Golf",Golf TV
+https://web-production-f2ad8.up.railway.app/play/us/Golf%20TV
+#EXTINF:-1 tvg-id="sky-sport-nba.iptv" tvg-name="Sky Sport NBA" tvg-logo="" group-title="Baloncesto",Sky Sport NBA
+https://web-production-f2ad8.up.railway.app/play/it/Sky%20Sport%20NBA
+#EXTINF:-1 tvg-id="supersport-rugby.iptv" tvg-name="SuperSport Rugby" tvg-logo="" group-title="Rugby",SuperSport Rugby
+https://web-production-f2ad8.up.railway.app/play/za/SuperSport%20Rugby
+#EXTINF:-1 tvg-id="sky-sports-action.iptv" tvg-name="Sky Sports Action" tvg-logo="" group-title="Boxeo",Sky Sports Action
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Action
+#EXTINF:-1 tvg-id="sky-sports-arena.iptv" tvg-name="Sky Sports Arena" tvg-logo="" group-title="Boxeo",Sky Sports Arena
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Arena
+#EXTINF:-1 tvg-id="sky-sports-football.iptv" tvg-name="Sky Sports Football" tvg-logo="" group-title="Premier League",Sky Sports Football
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Football
+#EXTINF:-1 tvg-id="sky-sports-premier-league.iptv" tvg-name="Sky Sports Premier League" tvg-logo="" group-title="Premier League",Sky Sports Premier League
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Premier%20League
+#EXTINF:-1 tvg-id="tnt-sports-1.iptv" tvg-name="TNT Sports 1" tvg-logo="" group-title="Premier League",TNT Sports 1
+https://web-production-f2ad8.up.railway.app/play/gb/TNT%20Sports%201
+#EXTINF:-1 tvg-id="tnt-sports-2.iptv" tvg-name="TNT Sports 2" tvg-logo="" group-title="Premier League",TNT Sports 2
+https://web-production-f2ad8.up.railway.app/play/gb/TNT%20Sports%202
+#EXTINF:-1 tvg-id="tnt-sports-3.iptv" tvg-name="TNT Sports 3" tvg-logo="" group-title="Premier League",TNT Sports 3
+https://web-production-f2ad8.up.railway.app/play/gb/TNT%20Sports%203
+#EXTINF:-1 tvg-id="rmc-sport-1.iptv" tvg-name="RMC Sport 1" tvg-logo="" group-title="Futbol Europa",RMC Sport 1
+https://web-production-f2ad8.up.railway.app/play/fr/RMC%20Sport%201
+#EXTINF:-1 tvg-id="rmc-sport-2.iptv" tvg-name="RMC Sport 2" tvg-logo="" group-title="Futbol Europa",RMC Sport 2
+https://web-production-f2ad8.up.railway.app/play/fr/RMC%20Sport%202
+#EXTINF:-1 tvg-id="canal-sport.iptv" tvg-name="Canal Sport" tvg-logo="" group-title="Futbol Europa",Canal Sport
+https://web-production-f2ad8.up.railway.app/play/fr/Canal%20Sport
+#EXTINF:-1 tvg-id="canal-sport360.iptv" tvg-name="Canal Sport360" tvg-logo="" group-title="Futbol Europa",Canal Sport360
+https://web-production-f2ad8.up.railway.app/play/fr/Canal%20Sport360
+#EXTINF:-1 tvg-id="sky-sports-cricket.iptv" tvg-name="Sky Sports Cricket" tvg-logo="" group-title="Cricket",Sky Sports Cricket
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Cricket
+#EXTINF:-1 tvg-id="sky-sports-main-event.iptv" tvg-name="Sky Sports Main Event" tvg-logo="" group-title="Multideporte",Sky Sports Main Event
+https://web-production-f2ad8.up.railway.app/play/gb/Sky%20Sports%20Main%20Event
+#EXTINF:-1 tvg-id="euro-sport-1.iptv" tvg-name="Euro Sport 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Eurosport_1_Logo_2015.svg/200px-Eurosport_1_Logo_2015.svg.png" group-title="Multideporte",Euro Sport 1
+https://web-production-f2ad8.up.railway.app/play/it/Euro%20Sport%201
+#EXTINF:-1 tvg-id="euro-sport-2.iptv" tvg-name="Euro Sport 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Eurosport_2_logo_2015.svg/200px-Eurosport_2_logo_2015.svg.png" group-title="Multideporte",Euro Sport 2
+https://web-production-f2ad8.up.railway.app/play/it/Euro%20Sport%202
+#EXTINF:-1 tvg-id="rai-sport.iptv" tvg-name="Rai Sport" tvg-logo="" group-title="Multideporte",Rai Sport
+https://web-production-f2ad8.up.railway.app/play/it/Rai%20Sport
+#EXTINF:-1 tvg-id="barca-tv.iptv" tvg-name="Barca TV" tvg-logo="" group-title="Clubs",Barca TV
+https://web-production-f2ad8.up.railway.app/play/es/Barca%20TV
+#EXTINF:-1 tvg-id="real-madrid-tv.iptv" tvg-name="Real Madrid TV" tvg-logo="" group-title="Clubs",Real Madrid TV
+https://web-production-f2ad8.up.railway.app/play/es/Real%20Madrid%20TV
+#EXTINF:-1 tvg-id="tve-la-1.iptv" tvg-name="TVE La 1" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Logo_TVE_2021.svg/200px-Logo_TVE_2021.svg.png" group-title="TV",TVE La 1
+https://web-production-f2ad8.up.railway.app/play/es/TVE%20La%201
+#EXTINF:-1 tvg-id="tve-la-2.iptv" tvg-name="TVE La 2" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/La_2_television_espanola_logo.svg/200px-La_2_television_espanola_logo.svg.png" group-title="TV",TVE La 2
+https://web-production-f2ad8.up.railway.app/play/es/TVE%20La%202
