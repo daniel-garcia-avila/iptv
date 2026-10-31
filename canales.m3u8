@@ -17,3 +17,39 @@ http://127.0.0.1:6878/ace/getstream?id=3097d7e7ff0fe414711ee067a841168b6f5671cb
 
 #EXTINF:-1 tvg-id="canalhistoria.iptv" tvg-name="CANAL HISTORIA",CANAL HISTORIA
 http://127.0.0.1:6878/ace/manifest.m3u8?id=31c19ffb3472c289c5bbbbc174449c8ed0d19e38
+
+#EXTINF:-1 tvg-id="la1.iptv" tvg-name="LA 1 (AceStream)" group-title="AceStream",LA 1 (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=eb4975702ceadca7ed74f8707e17a9f55569dbb9
+
+#EXTINF:-1 tvg-id="la1.iptv" tvg-name="LA 1 (AceStream antiguo)" group-title="AceStream",LA 1 (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=eb4975702ceadca7ed74f8707e17a9f55569dbb9
+
+#EXTINF:-1 tvg-id="la2.iptv" tvg-name="LA 2 (AceStream)" group-title="AceStream",LA 2 (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=19f28f60c908f987b1a03da078e63320d7bf29e8
+
+#EXTINF:-1 tvg-id="la2.iptv" tvg-name="LA 2 (AceStream antiguo)" group-title="AceStream",LA 2 (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=19f28f60c908f987b1a03da078e63320d7bf29e8
+
+#EXTINF:-1 tvg-id="antena3.iptv" tvg-name="ANTENA 3 (AceStream)" group-title="AceStream",ANTENA 3 (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=0febfb5cac3384f487d55c559bbfc877db2d0357
+
+#EXTINF:-1 tvg-id="antena3.iptv" tvg-name="ANTENA 3 (AceStream antiguo)" group-title="AceStream",ANTENA 3 (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=0febfb5cac3384f487d55c559bbfc877db2d0357
+
+#EXTINF:-1 tvg-id="cuatro.iptv" tvg-name="CUATRO (AceStream)" group-title="AceStream",CUATRO (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=d3b11d6c18ad43df5cd42c1dafb4dd12d8f829e8
+
+#EXTINF:-1 tvg-id="cuatro.iptv" tvg-name="CUATRO (AceStream antiguo)" group-title="AceStream",CUATRO (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=d3b11d6c18ad43df5cd42c1dafb4dd12d8f829e8
+
+#EXTINF:-1 tvg-id="telecinco.iptv" tvg-name="TELECINCO (AceStream)" group-title="AceStream",TELECINCO (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=a64e02a6d914f098cbe1b724ff4f7aef83419a4a
+
+#EXTINF:-1 tvg-id="telecinco.iptv" tvg-name="TELECINCO (AceStream antiguo)" group-title="AceStream",TELECINCO (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=a64e02a6d914f098cbe1b724ff4f7aef83419a4a
+
+#EXTINF:-1 tvg-id="lasexta.iptv" tvg-name="LASEXTA (AceStream)" group-title="AceStream",LASEXTA (AceStream)
+http://127.0.0.1:6878/ace/manifest.m3u8?id=0b5f802f2de6488b4023d0f05195486e19d81ed7
+
+#EXTINF:-1 tvg-id="lasexta.iptv" tvg-name="LASEXTA (AceStream antiguo)" group-title="AceStream",LASEXTA (AceStream antiguo)
+http://127.0.0.1:6878/ace/getstream?id=0b5f802f2de6488b4023d0f05195486e19d81ed7
