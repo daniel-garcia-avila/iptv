@@ -2,14 +2,20 @@
 
 ## canales.m3u8
 
-✅ 13 funcionan · ⚠️ 0 dudosos · ❌ 2 fallan · 🔵 2 AceStream (sin comprobar)
+✅ 0 funcionan · ⚠️ 0 dudosos · ❌ 0 fallan · 🔵 10 AceStream (sin comprobar)
 
 | Canal | Estado | Detalle |
 | - | - | - |
-| [DAZN LaLiga](https://web-production-f2ad8.up.railway.app/play/es/DAZN%20LaLiga) | ❌ | HTTP 404 |
-| [M LALIGA](https://web-production-f2ad8.up.railway.app/play/es/M%20LALIGA) | ❌ | HTTP 404 |
-| [M Liga de Campeones](acestream://e572a5178ff72eed7d1d751a18b4b3419699f370) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
-| [LIGA CAMPEONES](http://127.0.0.1:6878/ace/getstream?id=e572a5178ff72eed7d1d751a18b4b3419699f370) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [DAZN LALIGA 1](acestream://64a9353032efa2acb093d0bb86481f20f482d47e) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [DAZN LALIGA 2](http://127.0.0.1:6878/ace/getstream?id=64a9353032efa2acb093d0bb86481f20f482d47e) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LALIGA 1](acestream://1ab443f5b4beb6d586f19e8b25b9f9646cf2ab78) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LALIGA 2](http://127.0.0.1:6878/ace/getstream?id=1ab443f5b4beb6d586f19e8b25b9f9646cf2ab78) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 1](acestream://e572a5178ff72eed7d1d751a18b4b3419699f370) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 2](http://127.0.0.1:6878/ace/getstream?id=e572a5178ff72eed7d1d751a18b4b3419699f370) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 3](acestream://bb5a8bf7752e978460ee1710e5e8950a5c9e1f99) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 4](http://127.0.0.1:6878/ace/getstream?id=bb5a8bf7752e978460ee1710e5e8950a5c9e1f99) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 5](acestream://0f0850a62ecdc4f79eec221cbebad01f3e0242bc) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
+| [MOVISTAR LIGA DE CAMPEONES 6](http://127.0.0.1:6878/ace/getstream?id=0f0850a62ecdc4f79eec221cbebad01f3e0242bc) | 🔵 | AceStream: solo se puede probar en un dispositivo con el motor instalado |
 
 ## extra.m3u8
 
