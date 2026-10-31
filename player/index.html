@@ -35,6 +35,9 @@
   video{width:100%;height:100%;display:block;background:#000}
   .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--mut);text-align:center;padding:20px;pointer-events:none}
   .overlay.hidden{display:none}
+  .overlay a{pointer-events:auto;color:var(--acc);word-break:break-all}
+  .overlay code{color:var(--txt)}
+  .dot.warn{background:var(--warn)}
   .spinner{width:38px;height:38px;border:3px solid #333;border-top-color:var(--acc);border-radius:50%;animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .stats{display:flex;gap:18px;flex-wrap:wrap;padding:10px 14px;font-size:13px;color:var(--mut);border-top:1px solid var(--line)}
@@ -137,7 +140,7 @@
   <div class="card">
     <b>Ajustes del motor</b>
     <label class="hint">Dirección del motor AceStream. Déjala vacía para detectarlo solo (este equipo: http://127.0.0.1:6878).</label>
-    <input id="engineUrl" placeholder="(mismo servidor)  ej: http://192.168.1.50:6878">
+    <input id="engineUrl" placeholder="Automático · ej: http://127.0.0.1:6878 o http://192.168.1.50:6878">
     <div class="row" style="display:flex;gap:8px;justify-content:flex-end">
       <button id="btnCloseSettings">Cancelar</button>
       <button class="primary" id="btnSaveSettings">Guardar</button>
@@ -198,29 +201,55 @@
   }
 
   // ---------- motor ----------
+  // JSONP: plan B si el motor no deja leer la respuesta por CORS
+  function jsonp(url, ms){
+    return new Promise((res, rej)=>{
+      const cb = '__acecb' + Date.now() + Math.floor(Math.random()*1e6);
+      const s = document.createElement('script');
+      const done = ()=>{ clearTimeout(t); try{ delete window[cb]; }catch{} s.remove(); };
+      const t = setTimeout(()=>{ done(); rej(new Error('timeout')); }, ms);
+      window[cb] = d => { done(); res(d); };
+      s.onerror = ()=>{ done(); rej(new Error('jsonp')); };
+      s.src = url + '&format=jsonp&callback=' + cb;
+      document.head.appendChild(s);
+    });
+  }
   async function tryEngine(b){
-    const j = await getJSON(b.replace(/\/+$/,'')+'/webui/api/service?method=get_version&format=json', 5000);
-    return (j.result && j.result.version) || 'activo';
+    const u = b.replace(/\/+$/,'') + '/webui/api/service?method=get_version';
+    try{
+      const j = await getJSON(u + '&format=json', 5000);
+      return {v: (j.result && j.result.version) || 'activo', cors: true};
+    }catch(e){
+      const j = await jsonp(u, 5000);
+      return {v: (j.result && j.result.version) || 'activo', cors: false};
+    }
   }
   async function checkEngine(){
     const dot=$('#engDot'), txt=$('#engTxt');
     dot.className='dot'; txt.textContent='Buscando motor…';
-    // Si no hay uno fijado: primero el mismo servidor (modo Docker), luego el AceStream de este equipo
-    const candidates = state.engine ? [state.engine] : (hostedStatic ? [LOCAL_ENGINE] : [location.origin, LOCAL_ENGINE]);
+        const local = [LOCAL_ENGINE, 'http://localhost:6878'];
+    const candidates = state.engine ? [state.engine] : (hostedStatic ? local : [location.origin, ...local]);
     for(const c of candidates){
       try{
-        const v = await tryEngine(c);
+        const r = await tryEngine(c);
         if(!state.engine) state.autoEngine = c;
-        dot.className='dot ok'; txt.textContent='Motor '+v+(c===LOCAL_ENGINE?' (este equipo)':'');
-        if(!state.current) overlay('Pega un ID de AceStream o elige un canal');
+        state.engineCors = r.cors;
+        dot.className = r.cors ? 'dot ok' : 'dot warn';
+        txt.textContent = 'Motor '+r.v+(local.includes(c)?' (este equipo)':'')+(r.cors?'':' · sin CORS');
+        if(!state.current) overlay(r.cors ? 'Pega un ID de AceStream o elige un canal'
+          : 'Motor encontrado, pero no permite que esta web lea el vídeo (CORS).<br>Puede que no reproduzca: si falla, usa “Copiar enlace VLC”.');
         return true;
       }catch{}
     }
+    const test = LOCAL_ENGINE + '/webui/api/service?method=get_version';
     dot.className='dot err'; txt.textContent='Motor no disponible · reintentar';
     if(!state.current) overlay(`<b>No encuentro AceStream en este equipo</b><br><br>
       1. Abre <b>Ace Stream</b> (en Windows, “Ace Stream Media”; en Android, “Ace Stream Engine”).<br>
-      2. Si el navegador pregunta por <b>acceso a la red local</b> o a otros dispositivos, pulsa <b>Permitir</b>.<br>
-      3. Pulsa “reintentar” arriba a la derecha.<br><br>
+      2. Prueba este enlace en una pestaña nueva: <a href="${test}" target="_blank" rel="noopener">${test}</a><br>
+      &nbsp;&nbsp;· Si sale un texto con <code>"version"</code>, el motor está bien → revisa el permiso del paso 3.<br>
+      &nbsp;&nbsp;· Si no carga, Ace Stream no está abierto o usa otro puerto.<br>
+      3. Permite el <b>acceso a la red local</b>: candado 🔒 junto a la dirección → Configuración del sitio → “Acceso a la red local” → Permitir.<br>
+      4. Pulsa “reintentar” arriba a la derecha.<br><br>
       <small>Los canales HLS normales de tus listas funcionan sin motor.</small>`);
     return false;
   }
