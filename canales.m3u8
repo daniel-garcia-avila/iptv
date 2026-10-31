@@ -1,34 +1,22 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-id="dazn-laliga1.iptv" tvg-name="DAZN LALIGA 1",DAZN LALIGA 1
-acestream://64a9353032efa2acb093d0bb86481f20f482d47e
-
-#EXTINF:-1 tvg-id="dazn-laliga2.iptv" tvg-name="DAZN LALIGA 2",DAZN LALIGA 2
-http://127.0.0.1:6878/ace/getstream?id=64a9353032efa2acb093d0bb86481f20f482d47e
-
-#EXTINF:-1 tvg-id="m-laliga1.iptv" tvg-name="MOVISTAR LALIGA 1",MOVISTAR LALIGA 1
-acestream://1ab443f5b4beb6d586f19e8b25b9f9646cf2ab78
-
-#EXTINF:-1 tvg-id="m-laliga2.iptv" tvg-name="MOVISTAR LALIGA 2",MOVISTAR LALIGA 2
-http://127.0.0.1:6878/ace/getstream?id=1ab443f5b4beb6d586f19e8b25b9f9646cf2ab78
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones1.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 1",MOVISTAR LIGA DE CAMPEONES 1
-acestream://e572a5178ff72eed7d1d751a18b4b3419699f370
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones11.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 2",MOVISTAR LIGA DE CAMPEONES 2
-http://127.0.0.1:6878/ace/getstream?id=e572a5178ff72eed7d1d751a18b4b3419699f370
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones2.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 3",MOVISTAR LIGA DE CAMPEONES 3
-acestream://bb5a8bf7752e978460ee1710e5e8950a5c9e1f99
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones22.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 4",MOVISTAR LIGA DE CAMPEONES 4
-http://127.0.0.1:6878/ace/getstream?id=bb5a8bf7752e978460ee1710e5e8950a5c9e1f99
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones3.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 5",MOVISTAR LIGA DE CAMPEONES 5
-acestream://0f0850a62ecdc4f79eec221cbebad01f3e0242bc
-
-#EXTINF:-1 tvg-id="m-liga-de-campeones33.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 6",MOVISTAR LIGA DE CAMPEONES 6
-http://127.0.0.1:6878/ace/getstream?id=0f0850a62ecdc4f79eec221cbebad01f3e0242bc
-
 #EXTINF:-1 tvg-id="La1.TV" tvg-name="La 1" tvg-logo="https://graph.facebook.com/la1detve/picture?width=200&height=200" group-title="TDT",La 1
 https://rtvelivestream.rtve.es/rtvesec/la1/la1_main_dvr.m3u8
+
+#EXTINF:-1 tvg-id="dazn-laliga1.iptv" tvg-name="DAZN LALIGA 1",DAZN LALIGA 1
+http://127.0.0.1:6878/ace/getstream?id=dda5d2cace9bc4cb0918e62bc50d657d4a10496a
+
+#EXTINF:-1 tvg-id="dazn-laliga2.iptv" tvg-name="DAZN LALIGA 2",DAZN LALIGA 2
+http://127.0.0.1:6878/ace/getstream?id=3097d7e7ff0fe414711ee067a841168b6f5671cb
+
+#EXTINF:-1 tvg-id="m-laliga.iptv" tvg-name="MOVISTAR LALIGA 2",MOVISTAR LALIGA
+http://127.0.0.1:6878/ace/getstream?id=31c19ffb3472c289c5bbbbc174449c8ed0d19e38
+
+#EXTINF:-1 tvg-id="m-liga-de-campeones.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES",MOVISTAR LIGA DE CAMPEONES
+http://127.0.0.1:6878/ace/getstream?id=e572a5178ff72eed7d1d751a18b4b3419699f370
+
+#EXTINF:-1 tvg-id="m-liga-de-campeones.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES",MOVISTAR LIGA DE CAMPEONES
+http://127.0.0.1:6878/ace/getstream?id=bb5a8bf7752e978460ee1710e5e8950a5c9e1f99
+
+#EXTINF:-1 tvg-id="m-liga-de-campeones.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES",MOVISTAR LIGA DE CAMPEONES
+http://127.0.0.1:6878/ace/getstream?id=0f0850a62ecdc4f79eec221cbebad01f3e0242bc
