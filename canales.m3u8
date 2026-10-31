@@ -29,3 +29,6 @@ acestream://0f0850a62ecdc4f79eec221cbebad01f3e0242bc
 
 #EXTINF:-1 tvg-id="m-liga-de-campeones33.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES 6",MOVISTAR LIGA DE CAMPEONES 6
 http://127.0.0.1:6878/ace/getstream?id=0f0850a62ecdc4f79eec221cbebad01f3e0242bc
+
+#EXTINF:-1 tvg-id="La1.TV" tvg-name="La 1" tvg-logo="https://graph.facebook.com/la1detve/picture?width=200&height=200" group-title="TDT",La 1
+https://rtvelivestream.rtve.es/rtvesec/la1/la1_main_dvr.m3u8
