@@ -1,3 +1,0 @@
-# Canales que NO quieres en mis_canales_es.m3u8
-# Escribe el nombre exacto del canal, uno por línea (sin la # delante). Ejemplo:
-# Canal Sur
