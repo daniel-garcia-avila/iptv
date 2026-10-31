@@ -312,7 +312,7 @@
 
   function playHLS(url){
     if(window.Hls && Hls.isSupported()){
-      const h = new Hls({liveSyncDurationCount:3, manifestLoadingMaxRetry:10, manifestLoadingRetryDelay:2000,
+      const h = new Hls({liveSyncDurationCount:3, manifestLoadingTimeOut:60000, manifestLoadingMaxRetry:10, manifestLoadingRetryDelay:2000, levelLoadingTimeOut:60000, fragLoadingTimeOut:60000,
                          levelLoadingMaxRetry:10, fragLoadingMaxRetry:10, lowLatencyMode:false});
       state.hls = h;
       h.loadSource(url); h.attachMedia(video);
@@ -344,6 +344,7 @@
 
   function startStats(){
     clearInterval(state.statTimer);
+    const t0 = Date.now(); let warned = false;
     const tick = async ()=>{
       if(!state.session || !state.session.stat_url) return;
       try{
@@ -353,6 +354,11 @@
         $('#sPeers').textContent = r.peers ?? '—';
         $('#sDown').textContent = fmtSpeed(r.speed_down);
         $('#sUp').textContent = fmtSpeed(r.speed_up);
+        // Sin nadie emitiendo: avisar en vez de quedarse cargando para siempre
+        if(!warned && r.status==='prebuf' && !r.peers && Date.now()-t0 > 30000){
+          warned = true;
+          overlay('<b>Este canal no tiene peers</b> (nadie lo está emitiendo ahora).<br>El ID puede estar caído o desactualizado: prueba otro canal o busca un ID nuevo.<br><small>Sigo esperando por si arranca…</small>', true);
+        }
       }catch{}
     };
     tick(); state.statTimer = setInterval(tick, 2000);
