@@ -3,13 +3,13 @@
 #EXTINF:-1 tvg-id="La1.TV" tvg-name="La 1" tvg-logo="https://graph.facebook.com/la1detve/picture?width=200&height=200" group-title="TDT",La 1
 https://rtvelivestream.rtve.es/rtvesec/la1/la1_main_dvr.m3u8
 
-#EXTINF:-1 tvg-id="dazn-laliga1.iptv" tvg-name="DAZN LALIGA 1",DAZN LALIGA 1
+#EXTINF:-1 tvg-id="telemadrid.iptv" tvg-name="TELEMADRID",TELEMADRID
 http://127.0.0.1:6878/ace/getstream?id=dda5d2cace9bc4cb0918e62bc50d657d4a10496a
 
-#EXTINF:-1 tvg-id="dazn-laliga2.iptv" tvg-name="DAZN LALIGA 2",DAZN LALIGA 2
+#EXTINF:-1 tvg-id="canalnou.iptv" tvg-name="CANALNOU",CANALNOU
 http://127.0.0.1:6878/ace/getstream?id=3097d7e7ff0fe414711ee067a841168b6f5671cb
 
-#EXTINF:-1 tvg-id="m-laliga.iptv" tvg-name="MOVISTAR LALIGA 2",MOVISTAR LALIGA
+#EXTINF:-1 tvg-id="canalhistoria.iptv" tvg-name="CANAL HISTORIA",CANAL HISTORIA
 http://127.0.0.1:6878/ace/getstream?id=31c19ffb3472c289c5bbbbc174449c8ed0d19e38
 
 #EXTINF:-1 tvg-id="m-liga-de-campeones.iptv" tvg-name="MOVISTAR LIGA DE CAMPEONES",MOVISTAR LIGA DE CAMPEONES
