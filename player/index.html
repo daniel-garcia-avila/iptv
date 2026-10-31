@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ace Player</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mpegts.js@1/dist/mpegts.js"></script>
+<style>
+  :root{
+    --bg:#0d0f14; --panel:#151922; --panel2:#1c2130; --line:#272d3d;
+    --txt:#e8ebf2; --mut:#8b93a7; --acc:#ff5a3c; --ok:#3ddc97; --warn:#ffb547; --err:#ff5470;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+  .logo{font-weight:800;letter-spacing:.5px;font-size:18px}
+  .logo b{color:var(--acc)}
+  .engine{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mut)}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--mut)}
+  .dot.ok{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  .dot.err{background:var(--err)}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;padding:18px 20px;max-width:1500px;margin:0 auto}
+  @media (max-width:950px){main{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+  .bar{display:flex;gap:8px;padding:12px;flex-wrap:wrap}
+  input,textarea,select{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px 12px;font:inherit;outline:none}
+  input:focus,textarea:focus{border-color:var(--acc)}
+  #idInput{flex:1;min-width:220px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+  button{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px 14px;font:inherit;cursor:pointer;white-space:nowrap}
+  button:hover{border-color:var(--mut)}
+  button.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+  button.small{padding:5px 9px;font-size:13px}
+  .stage{position:relative;background:#000;aspect-ratio:16/9;border-radius:0 0 12px 12px;overflow:hidden}
+  video{width:100%;height:100%;display:block;background:#000}
+  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--mut);text-align:center;padding:20px;pointer-events:none}
+  .overlay.hidden{display:none}
+  .overlay a{pointer-events:auto;color:var(--acc);word-break:break-all}
+  .overlay code{color:var(--txt)}
+  .dot.warn{background:var(--warn)}
+  .spinner{width:38px;height:38px;border:3px solid #333;border-top-color:var(--acc);border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .stats{display:flex;gap:18px;flex-wrap:wrap;padding:10px 14px;font-size:13px;color:var(--mut);border-top:1px solid var(--line)}
+  .stats span b{color:var(--txt);font-weight:600}
+  .tools{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--line);align-items:center}
+  .tools .mode{margin-left:auto;font-size:13px;color:var(--mut);display:flex;gap:6px;align-items:center}
+  aside{display:flex;flex-direction:column;gap:14px}
+  .tabs{display:flex;border-bottom:1px solid var(--line)}
+  .tabs button{flex:1;border:0;border-radius:0;background:transparent;color:var(--mut);padding:11px}
+  .tabs button.on{color:var(--txt);box-shadow:inset 0 -2px var(--acc)}
+  .list{max-height:520px;overflow:auto}
+  .item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+  .item:hover{background:var(--panel2)}
+  .item.playing{background:#2a1b18}
+  .item .name{flex:1;min-width:0}
+  .item .name div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item .id{font:12px ui-monospace,Menlo,monospace;color:var(--mut)}
+  .item .grp{font-size:11px;color:var(--acc)}
+  .empty{padding:18px;color:var(--mut);font-size:14px;text-align:center}
+  .filter{padding:10px 12px;border-bottom:1px solid var(--line)}
+  .filter input{width:100%}
+  details{padding:12px}
+  details summary{cursor:pointer;color:var(--mut)}
+  details .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  details .row input{flex:1}
+  details textarea{width:100%;min-height:90px;margin-top:10px;font:12px ui-monospace,monospace}
+  .hint{font-size:12px;color:var(--mut);margin-top:8px}
+  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--panel2);border:1px solid var(--line);padding:10px 16px;border-radius:10px;transition:.25s;z-index:9}
+  #toast.show{transform:translateX(-50%) translateY(0)}
+  .modal{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:8}
+  .modal.show{display:flex}
+  .modal .card{padding:18px;width:min(440px,92vw);display:flex;flex-direction:column;gap:10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ACE<b>▶</b>PLAYER</div>
+  <div class="engine" title="Estado del motor AceStream">
+    <span class="dot" id="engDot"></span><span id="engTxt">Comprobando motor…</span>
+    <button class="small" id="btnSettings">⚙</button>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <form class="bar" id="playForm">
+      <input id="idInput" placeholder="ID de AceStream o enlace acestream://…" autocomplete="off" spellcheck="false">
+      <button class="primary" type="submit">▶ Reproducir</button>
+    </form>
+    <div class="stage">
+      <video id="video" controls playsinline></video>
+      <div class="overlay" id="overlay"><div style="font-size:42px">📡</div><div>Pega un ID de AceStream para empezar</div></div>
+    </div>
+    <div class="stats" id="stats">
+      <span>Estado: <b id="sStatus">—</b></span>
+      <span>Peers: <b id="sPeers">—</b></span>
+      <span>↓ <b id="sDown">—</b></span>
+      <span>↑ <b id="sUp">—</b></span>
+      <span>Buffer: <b id="sBuf">—</b></span>
+    </div>
+    <div class="tools">
+      <button class="small" id="btnStop">■ Parar</button>
+      <button class="small" id="btnFav">☆ Favorito</button>
+      <button class="small" id="btnCopyVlc">Copiar enlace VLC</button>
+      <button class="small" id="btnCopyAce">Copiar acestream://</button>
+      <button class="small" id="btnPip">Mini‑ventana</button>
+      <label class="mode">Modo
+        <select id="modeSel">
+          <option value="hls">HLS (recomendado)</option>
+          <option value="ts">MPEG‑TS (menos retraso)</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <div class="tabs">
+        <button data-tab="favs" class="on">★ Favoritos</button>
+        <button data-tab="lists">📋 Listas</button>
+        <button data-tab="hist">🕘 Historial</button>
+      </div>
+      <div class="filter"><input id="filter" placeholder="Buscar canal…"></div>
+      <div class="list" id="list"></div>
+      <details id="importBox">
+        <summary>Importar lista M3U</summary>
+        <div class="row">
+          <input id="m3uUrl" placeholder="URL de la lista .m3u (p. ej. raw.githubusercontent.com/…)">
+          <button id="btnLoadUrl">Cargar</button>
+        </div>
+        <textarea id="m3uText" placeholder="…o pega aquí el contenido M3U / una línea por canal: Nombre,ID"></textarea>
+        <div class="row"><button id="btnLoadText">Importar texto</button><button id="btnClearLists">Vaciar listas</button></div>
+        <div class="hint">Detecta enlaces acestream://, /ace/getstream?id= y IDs sueltos de 40 caracteres.</div>
+      </details>
+    </div>
+  </aside>
+</main>
+
+<div class="modal" id="settings">
+  <div class="card">
+    <b>Ajustes del motor</b>
+    <label class="hint">Dirección del motor AceStream. Déjala vacía para detectarlo solo (este equipo: http://127.0.0.1:6878).</label>
+    <input id="engineUrl" placeholder="Automático · ej: http://127.0.0.1:6878 o http://192.168.1.50:6878">
+    <div class="row" style="display:flex;gap:8px;justify-content:flex-end">
+      <button id="btnCloseSettings">Cancelar</button>
+      <button class="primary" id="btnSaveSettings">Guardar</button>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const store = {
+    get(k, d){ try{ const v = localStorage.getItem('ace.'+k); return v ? JSON.parse(v) : d; }catch{ return d; } },
+    set(k, v){ try{ localStorage.setItem('ace.'+k, JSON.stringify(v)); }catch{} }
+  };
+
+  const state = {
+    engine: store.get('engine', ''),   // fijado a mano en ⚙
+    autoEngine: null,                  // detectado al arrancar
+    mode: store.get('mode', 'hls'),
+    favs: store.get('favs', []),
+    lists: store.get('lists', []),
+    hist: store.get('hist', []),
+    tab: 'favs',
+    current: null,       // {id, name}
+    session: null,       // {stat_url, command_url}
+    hls: null, ts: null, statTimer: null
+  };
+
+  const video = $('#video');
+  const pid = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2));
+
+  // ---------- utilidades ----------
+  const LOCAL_ENGINE = 'http://127.0.0.1:6878';
+  const hostedStatic = /github\.io$/i.test(location.hostname) || location.protocol === 'file:';
+  const base = () => (state.engine || state.autoEngine || (hostedStatic ? LOCAL_ENGINE : location.origin)).replace(/\/+$/, '');
+  const isUrlItem = id => typeof id === 'string' && id.startsWith('u:');
+  const abs = u => { try { const x = new URL(u, base()); const b = new URL(base());
+      // Si el motor devuelve una URL con su host interno, la reconducimos a nuestra base
+      if (x.origin !== b.origin) { x.protocol = b.protocol; x.host = b.host; }
+      return x.toString(); } catch { return u; } };
+  function parseId(raw){
+    if(!raw) return null;
+    const m = String(raw).match(/(?:acestream:\/\/|[?&](?:id|content_id)=)?\b([0-9a-f]{40})\b/i);
+    return m ? m[1].toLowerCase() : null;
+  }
+  const short = id => { if(isUrlItem(id)){ try{ return 'HLS · '+new URL(id.slice(2)).hostname; }catch{ return 'HLS'; } } return id.slice(0,8)+'…'+id.slice(-6); };
+  const fmtSpeed = kb => kb == null ? '—' : (kb >= 1024 ? (kb/1024).toFixed(1)+' MB/s' : kb+' KB/s');
+  const nameFor = id => (state.favs.find(f=>f.id===id) || state.lists.find(f=>f.id===id) || state.hist.find(f=>f.id===id) || {}).name || short(id);
+  function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2400); }
+  function overlay(html, spin){ const o=$('#overlay'); if(html==null){o.classList.add('hidden');return;}
+    o.classList.remove('hidden'); o.innerHTML=(spin?'<div class="spinner"></div>':'')+'<div>'+html+'</div>'; }
+  async function copy(text){ try{ await navigator.clipboard.writeText(text); toast('Copiado'); }catch{ prompt('Copia el enlace:', text); } }
+  async function getJSON(url, ms=8000){
+    const c = new AbortController(); const t = setTimeout(()=>c.abort(), ms);
+    try { const r = await fetch(url, {signal:c.signal, cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status); return await r.json(); }
+    finally { clearTimeout(t); }
+  }
+
+  // ---------- motor ----------
+  // JSONP: plan B si el motor no deja leer la respuesta por CORS
+  function jsonp(url, ms){
+    return new Promise((res, rej)=>{
+      const cb = '__acecb' + Date.now() + Math.floor(Math.random()*1e6);
+      const s = document.createElement('script');
+      const done = ()=>{ clearTimeout(t); try{ delete window[cb]; }catch{} s.remove(); };
+      const t = setTimeout(()=>{ done(); rej(new Error('timeout')); }, ms);
+      window[cb] = d => { done(); res(d); };
+      s.onerror = ()=>{ done(); rej(new Error('jsonp')); };
+      s.src = url + '&format=jsonp&callback=' + cb;
+      document.head.appendChild(s);
+    });
+  }
+  async function tryEngine(b){
+    const u = b.replace(/\/+$/,'') + '/webui/api/service?method=get_version';
+    try{
+      const j = await getJSON(u + '&format=json', 5000);
+      return {v: (j.result && j.result.version) || 'activo', cors: true};
+    }catch(e){
+      const j = await jsonp(u, 5000);
+      return {v: (j.result && j.result.version) || 'activo', cors: false};
+    }
+  }
+  async function checkEngine(){
+    const dot=$('#engDot'), txt=$('#engTxt');
+    dot.className='dot'; txt.textContent='Buscando motor…';
+        const local = [LOCAL_ENGINE, 'http://localhost:6878'];
+    const candidates = state.engine ? [state.engine] : (hostedStatic ? local : [location.origin, ...local]);
+    for(const c of candidates){
+      try{
+        const r = await tryEngine(c);
+        if(!state.engine) state.autoEngine = c;
+        state.engineCors = r.cors;
+        dot.className = r.cors ? 'dot ok' : 'dot warn';
+        txt.textContent = 'Motor '+r.v+(local.includes(c)?' (este equipo)':'')+(r.cors?'':' · sin CORS');
+        if(!state.current) overlay(r.cors ? 'Pega un ID de AceStream o elige un canal'
+          : 'Motor encontrado, pero no permite que esta web lea el vídeo (CORS).<br>Puede que no reproduzca: si falla, usa “Copiar enlace VLC”.');
+        return true;
+      }catch{}
+    }
+    const test = LOCAL_ENGINE + '/webui/api/service?method=get_version';
+    dot.className='dot err'; txt.textContent='Motor no disponible · reintentar';
+    if(!state.current) overlay(`<b>No encuentro AceStream en este equipo</b><br><br>
+      1. Abre <b>Ace Stream</b> (en Windows, “Ace Stream Media”; en Android, “Ace Stream Engine”).<br>
+      2. Prueba este enlace en una pestaña nueva: <a href="${test}" target="_blank" rel="noopener">${test}</a><br>
+      &nbsp;&nbsp;· Si sale un texto con <code>"version"</code>, el motor está bien → revisa el permiso del paso 3.<br>
+      &nbsp;&nbsp;· Si no carga, Ace Stream no está abierto o usa otro puerto.<br>
+      3. Permite el <b>acceso a la red local</b>: candado 🔒 junto a la dirección → Configuración del sitio → “Acceso a la red local” → Permitir.<br>
+      4. Pulsa “reintentar” arriba a la derecha.<br><br>
+      <small>Los canales HLS normales de tus listas funcionan sin motor.</small>`);
+    return false;
+  }
+  $('#engTxt').style.cursor='pointer';
+  $('#engTxt').onclick = checkEngine;
+
+  // ---------- reproducción ----------
+  function teardown(){
+    clearInterval(state.statTimer); state.statTimer=null;
+    if(state.hls){ state.hls.destroy(); state.hls=null; }
+    if(state.ts){ try{ state.ts.destroy(); }catch{} state.ts=null; }
+    video.removeAttribute('src'); video.load();
+  }
+  async function stop(){
+    const s = state.session; teardown(); state.session=null;
+    if(s && s.command_url){ fetch(abs(s.command_url)+(s.command_url.includes('?')?'&':'?')+'method=stop').catch(()=>{}); }
+    ['#sStatus','#sPeers','#sDown','#sUp','#sBuf'].forEach(k=>$(k).textContent='—');
+    state.current=null; render(); overlay('Reproducción detenida');
+  }
+
+  async function playUrl(key, name){
+    const url = key.slice(2);
+    if(state.current) await stop();
+    state.current = {id:key, name: name || nameFor(key)};
+    pushHist(state.current); render();
+    $('#idInput').value = url;
+    const host = (()=>{ try{ return new URL(url).hostname; }catch{ return ''; } })();
+    if(location.protocol==='https:' && url.startsWith('http:') && !/^(127\.0\.0\.1|localhost)$/.test(host)){
+      overlay('Este canal usa <b>http://</b> y el navegador lo bloquea dentro de una web segura.<br>Usa “Copiar enlace VLC” y ábrelo en VLC.');
+      return;
+    }
+    overlay('Cargando <b>'+esc(state.current.name)+'</b>…', true);
+    playHLS(url);
+  }
+
+  async function play(id, name){
+    if(isUrlItem(id)) return playUrl(id, name);
+    if(/^https?:\/\//i.test(id) && !parseId(id)) return playUrl('u:'+id.trim(), name);
+    id = parseId(id); if(!id){ toast('ID no válido (deben ser 40 caracteres hex)'); return; }
+    if(state.current) await stop();
+    state.current = {id, name: name || nameFor(id)};
+    pushHist(state.current); render();
+    $('#idInput').value = id;
+    overlay('Conectando con los peers de <b>'+esc(state.current.name)+'</b>…<br><small>Los canales P2P pueden tardar 10‑30 s en arrancar</small>', true);
+
+    const ts = state.mode === 'ts';
+    const ep = ts ? '/ace/getstream' : '/ace/manifest.m3u8';
+    let streamUrl = base()+ep+'?id='+id+'&pid='+pid;
+
+    // Intentamos la API JSON para tener estadísticas; si falla, vamos directos
+    try{
+      const j = await getJSON(base()+ep+'?format=json&id='+id+'&pid='+pid, 30000);
+      if(j.error) throw new Error(j.error);
+      const r = j.response || {};
+      if(r.playback_url){ streamUrl = abs(r.playback_url); state.session = r; startStats(); }
+    }catch(e){ console.warn('API JSON no disponible, modo directo:', e.message); }
+
+    if(ts) playTS(streamUrl); else playHLS(streamUrl);
+  }
+
+  function playHLS(url){
+    if(window.Hls && Hls.isSupported()){
+      const h = new Hls({liveSyncDurationCount:3, manifestLoadingMaxRetry:10, manifestLoadingRetryDelay:2000,
+                         levelLoadingMaxRetry:10, fragLoadingMaxRetry:10, lowLatencyMode:false});
+      state.hls = h;
+      h.loadSource(url); h.attachMedia(video);
+      h.on(Hls.Events.MANIFEST_PARSED, ()=>{ video.play().catch(()=>overlay('Pulsa ▶ para empezar')); });
+      h.on(Hls.Events.ERROR, (_, d)=>{
+        if(!d.fatal) return;
+        if(d.type===Hls.ErrorTypes.NETWORK_ERROR){ overlay('Esperando al stream…', true); setTimeout(()=>h.startLoad(),2000); }
+        else if(d.type===Hls.ErrorTypes.MEDIA_ERROR){ h.recoverMediaError(); }
+        else { overlay('Error de reproducción. Prueba el modo MPEG‑TS o revisa que el canal esté activo.'); }
+      });
+    } else if(video.canPlayType('application/vnd.apple.mpegurl')){ // Safari / iOS
+      video.src = url; video.play().catch(()=>{});
+    } else overlay('Tu navegador no soporta HLS');
+  }
+
+  function playTS(url){
+    if(!(window.mpegts && mpegts.getFeatureList().mseLivePlayback)){ overlay('Este navegador no soporta MPEG‑TS. Usa el modo HLS.'); return; }
+    const p = mpegts.createPlayer({type:'mpegts', isLive:true, url}, {enableStashBuffer:true, liveBufferLatencyChasing:true});
+    state.ts = p; p.attachMediaElement(video); p.load();
+    p.on(mpegts.Events.ERROR, ()=> overlay('Error en el stream MPEG‑TS. Prueba el modo HLS.'));
+    video.play().catch(()=>{});
+  }
+
+  video.addEventListener('playing', ()=>overlay(null));
+  video.addEventListener('waiting', ()=>{ if(state.current) overlay('Cargando buffer…', true); });
+  video.addEventListener('timeupdate', ()=>{
+    const b=video.buffered; if(b.length){ $('#sBuf').textContent=Math.max(0,b.end(b.length-1)-video.currentTime).toFixed(1)+' s'; }
+  });
+
+  function startStats(){
+    clearInterval(state.statTimer);
+    const tick = async ()=>{
+      if(!state.session || !state.session.stat_url) return;
+      try{
+        const j = await getJSON(abs(state.session.stat_url), 4000); const r = j.response || {};
+        const st = {prebuf:'Pre‑buffer', dl:'Descargando', buf:'Buffering', idle:'En espera', check:'Comprobando'}[r.status] || r.status || '—';
+        $('#sStatus').textContent = st + (r.status==='prebuf' && r.progress!=null ? ' '+r.progress+'%' : '');
+        $('#sPeers').textContent = r.peers ?? '—';
+        $('#sDown').textContent = fmtSpeed(r.speed_down);
+        $('#sUp').textContent = fmtSpeed(r.speed_up);
+      }catch{}
+    };
+    tick(); state.statTimer = setInterval(tick, 2000);
+  }
+
+  // ---------- favoritos / historial / listas ----------
+  function pushHist(c){
+    state.hist = [{id:c.id,name:c.name,t:Date.now()}, ...state.hist.filter(h=>h.id!==c.id)].slice(0,50);
+    store.set('hist', state.hist);
+  }
+  function toggleFav(id, name){
+    const i = state.favs.findIndex(f=>f.id===id);
+    if(i>=0){ state.favs.splice(i,1); toast('Quitado de favoritos'); }
+    else { const n = window.prompt ? (prompt('Nombre del canal:', name || nameFor(id)) || name || short(id)) : name; state.favs.unshift({id, name:n}); toast('Añadido a favoritos'); }
+    store.set('favs', state.favs); render();
+  }
+
+  function parseM3U(text, source){
+    const out=[]; const seen=new Set(); let name=null, group=null;
+    for(const raw of text.split(/\r?\n/)){
+      const line = raw.trim(); if(!line) continue;
+      if(line.startsWith('#EXTINF')){
+        name = (line.split(',').slice(1).join(',')||'').trim() || null;
+        const g = line.match(/group-title="([^"]*)"/i); group = g ? g[1] : null;
+        continue;
+      }
+      if(line.startsWith('#')) continue;
+      // Canal AceStream (acestream://, getstream/manifest?id=, ID suelto) o, si no, URL de vídeo normal
+      const id = parseId(line) || (/^https?:\/\/\S+$/i.test(line) ? 'u:'+line : null);
+      if(id && !seen.has(id)){
+        let n = name;
+        if(!n && line.includes(',') && !isUrlItem(id)) n = line.split(',')[0].trim();  // formato "Nombre,ID"
+        seen.add(id); out.push({id, name: n || short(id), group: group || source || ''});
+      }
+      name=null; group=null;
+    }
+    return out;
+  }
+  function addToLists(items){
+    const ids = new Set(state.lists.map(l=>l.id)); let n=0;
+    for(const it of items){ if(!ids.has(it.id)){ state.lists.push(it); ids.add(it.id); n++; } }
+    store.set('lists', state.lists); state.tab='lists'; render();
+    toast(n ? n+' canales importados' : 'No se encontraron canales nuevos');
+  }
+
+  const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function render(){
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on', b.dataset.tab===state.tab));
+    const q = $('#filter').value.toLowerCase();
+    const src = state[state.tab].filter(x=> !q || (x.name+' '+x.id+' '+(x.group||'')).toLowerCase().includes(q));
+    const cur = state.current && state.current.id;
+    $('#list').innerHTML = src.length ? src.map(x=>`
+      <div class="item ${x.id===cur?'playing':''}" data-id="${x.id}" data-name="${esc(x.name)}">
+        <div class="name">${x.group?`<div class="grp">${esc(x.group)}</div>`:''}<div>${x.id===cur?'▶ ':''}${esc(x.name)}</div><div class="id">${short(x.id)}</div></div>
+        <button class="small fav" title="Favorito">${state.favs.some(f=>f.id===x.id)?'★':'☆'}</button>
+        ${state.tab!=='lists' ? '<button class="small del" title="Quitar">✕</button>' : ''}
+      </div>`).join('')
+      : `<div class="empty">${{favs:'Aún no tienes favoritos.',lists:'Importa una lista M3U abajo.',hist:'Sin historial todavía.'}[state.tab]}</div>`;
+    $('#btnFav').textContent = cur && state.favs.some(f=>f.id===cur) ? '★ Favorito' : '☆ Favorito';
+    $('#importBox').style.display = state.tab==='lists' ? '' : 'none';
+  }
+
+  // ---------- eventos ----------
+  $('#playForm').addEventListener('submit', e=>{ e.preventDefault(); play($('#idInput').value); });
+  $('#idInput').addEventListener('paste', ()=> setTimeout(()=>{ if(parseId($('#idInput').value)) play($('#idInput').value); }, 0));
+  $('#btnStop').onclick = stop;
+  const curKey = ()=> (state.current && state.current.id) || parseId($('#idInput').value);
+  $('#btnFav').onclick = ()=>{ const id=curKey(); if(id) toggleFav(id, state.current&&state.current.name); };
+  $('#btnCopyVlc').onclick = ()=>{ const id=curKey(); if(!id) return; copy(isUrlItem(id) ? id.slice(2) : base()+'/ace/getstream?id='+id); };
+  $('#btnCopyAce').onclick = ()=>{ const id=parseId($('#idInput').value); if(id) copy('acestream://'+id); };
+  $('#btnPip').onclick = ()=>{ if(document.pictureInPictureEnabled) video.requestPictureInPicture().catch(()=>{}); };
+  $('#modeSel').value = state.mode;
+  $('#modeSel').onchange = e=>{ state.mode=e.target.value; store.set('mode',state.mode); if(state.current) play(state.current.id, state.current.name); };
+  document.querySelectorAll('.tabs button').forEach(b=> b.onclick=()=>{ state.tab=b.dataset.tab; render(); });
+  $('#filter').oninput = render;
+  $('#list').addEventListener('click', e=>{
+    const it = e.target.closest('.item'); if(!it) return;
+    const id = it.dataset.id, name = it.dataset.name;
+    if(e.target.classList.contains('fav')) return toggleFav(id, name);
+    if(e.target.classList.contains('del')){ state[state.tab]=state[state.tab].filter(x=>x.id!==id); store.set(state.tab,state[state.tab]); return render(); }
+    play(id, name);
+  });
+  $('#btnLoadUrl').onclick = async ()=>{
+    const u = $('#m3uUrl').value.trim(); if(!u) return;
+    try{ const r = await fetch(u, {cache:'no-store'}); if(!r.ok) throw 0; const txt = await r.text();
+      const label = decodeURIComponent(u.split('/').pop().replace(/\.m3u8?$/,''));
+      addToLists(parseM3U(txt, label)); }
+    catch{ toast('No se pudo descargar la lista (¿CORS o URL incorrecta?)'); }
+  };
+  $('#btnLoadText').onclick = ()=> addToLists(parseM3U($('#m3uText').value, 'Manual'));
+  $('#btnClearLists').onclick = ()=>{ state.lists=[]; store.set('lists',[]); render(); };
+  $('#btnSettings').onclick = ()=>{ $('#engineUrl').value = state.engine; $('#settings').classList.add('show'); };
+  $('#btnCloseSettings').onclick = ()=> $('#settings').classList.remove('show');
+  $('#btnSaveSettings').onclick = ()=>{ state.engine = $('#engineUrl').value.trim(); store.set('engine', state.engine); $('#settings').classList.remove('show'); checkEngine(); };
+  document.addEventListener('keydown', e=>{
+    if(e.target.matches('input,textarea')) return;
+    if(e.key==='f') video.requestFullscreen && video.requestFullscreen().catch(()=>{});
+    if(e.key==='m') video.muted = !video.muted;
+  });
+  window.addEventListener('beforeunload', ()=>{ const s=state.session; if(s&&s.command_url) navigator.sendBeacon && navigator.sendBeacon(abs(s.command_url)+'&method=stop'); });
+
+  // Permite abrir directamente: http://servidor:8080/#<id>
+  // Carga automática de las listas del propio repo (cuando la web está en GitHub Pages)
+  async function loadRepoLists(){
+    const files = ['../canales.m3u8'];
+    let items = [];
+    for(const f of files){
+      try{ const r = await fetch(f, {cache:'no-store'}); if(r.ok) items = items.concat(parseM3U(await r.text(), 'Mi lista').map(x=>({...x, repo:true}))); }catch{}
+    }
+    if(!items.length) return;
+    const ids = new Set(items.map(x=>x.id));
+    state.lists = items.concat(state.lists.filter(x=>!x.repo && !ids.has(x.id)));
+    store.set('lists', state.lists);
+    if(!state.favs.length) state.tab = 'lists';
+    render();
+  }
+
+  render(); checkEngine(); loadRepoLists();
+  const fromHash = parseId(location.hash);
+  if(fromHash) play(fromHash);
+  window.addEventListener('hashchange', ()=>{ const id=parseId(location.hash); if(id) play(id); });
+  window.__ace = {parseM3U, parseId};   // para pruebas
+})();
+</script>
+</body>
+</html>
